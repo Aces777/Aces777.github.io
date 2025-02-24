@@ -1,0 +1,976 @@
+:root {
+    --bg-dark: #121212;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --accent: #1e90ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(-45deg, 
+        #121212, 
+        #202020,
+        #1a2942,
+        #252525);
+    background-size: 300% 300%;
+    animation: gradientBG 15s ease infinite;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* 恢复原来的背景动画 */
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 100%;  /* 减小移动范围 */
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 恢复原来的粒子效果 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    animation: particleFloat 20s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-50px);
+    }
+}
+
+/* 恢复原来的光晕效果 */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, 
+        rgba(30, 144, 255, 0.08) 0%,
+        transparent 70%);
+    animation: glowPulse 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.navbar-container {
+    width: 100%;
+    background-color: rgba(18, 18, 18, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 9998;
+    display: flex;
+    justify-content: center;  /* 居中对齐 */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 4rem;  /* 增加水平内边距 */
+    max-width: 1600px;
+    margin: 0 auto;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 9998;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 3rem;  /* 增加链接之间的间距 */
+}
+
+.nav-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+}
+
+/* 当前页面的链接也使用蓝色 */
+.nav-links a.active {
+    color: var(--accent);
+}
+
+.nav-brand {
+    color: var(--text-primary);
+    animation: breathe 3s ease-in-out infinite;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.nav-brand:hover {
+    opacity: 0.8;
+}
+
+/* 添加呼吸动画 */
+@keyframes breathe {
+    0%, 100% {
+        opacity: 0.8;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        opacity: 1;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem 0;
+    text-align: center;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.hero-content {
+    margin-top: 20px;
+    position: relative;
+    animation: float 8s ease-in-out infinite;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content h2 {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    margin-bottom: 0.8rem;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5),
+        0 0 15px rgba(30, 144, 255, 0.3);
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+/* 添加悬浮动画 */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* 添加光晕效果 */
+.hero-content::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, 
+        rgba(30, 144, 255, 0.1) 0%,
+        transparent 70%);
+    z-index: 1;
+    animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+}
+
+.section-title {
+    width: 100%;
+    max-width: 1600px;
+    padding: 0;
+    margin-top: 4rem;  /* 增加顶部间距 */
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title h2 {
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 0.5rem;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5),  /* 主阴影 */
+        0 0 10px rgba(0, 0, 0, 0.3);  /* 柔和的发光效果 */
+    letter-spacing: 1px;  /* 增加字间距 */
+}
+
+.section-title h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    opacity: 0.8;
+    box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);  /* 为下划线添加发光效果 */
+}
+
+.section-title .subtitle {
+    color: #808080; /* 使用更柔和的灰色 */
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    opacity: 0.7; /* 降低不透明度 */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 3rem 0;  /* 增加上下内边距 */
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.video-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    transform-origin: center;
+    margin-bottom: 1rem;  /* 添加底部间距 */
+}
+
+.video-item:hover {
+    transform: scale(1.05);  /* 悬停时放大 */
+    z-index: 1;  /* 确保放大的视频在上层 */
+}
+
+.video-item video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 8px 8px 0 0;  /* 修改为只有上方圆角 */
+    overflow: hidden;
+    background: #1a1a1a;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease;
+    margin-bottom: -8px;  /* 消除与标题之间的间隙 */
+}
+
+.video-item:hover video {
+    box-shadow: 0 8px 30px rgba(30, 144, 255, 0.2);
+}
+
+.video-item img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #1a1a1a;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease;
+}
+
+.video-item:hover img {
+    box-shadow: 0 8px 30px rgba(30, 144, 255, 0.2);
+}
+
+.video-item h3 {
+    color: var(--text-primary);
+    margin: 0;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 0.8rem 0;
+    font-weight: normal;
+    opacity: 0.9;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
+    border-radius: 0 0 8px 8px;
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(5px);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.2),  /* 外部阴影 */
+        0 -2px 8px rgba(0, 0, 0, 0.1);  /* 上方阴影 */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);  /* 文字阴影 */
+    transition: all 0.3s ease;  /* 添加过渡效果 */
+}
+
+.video-item:hover h3 {
+    box-shadow: 
+        0 6px 16px rgba(0, 0, 0, 0.25),  /* 悬停时增强外部阴影 */
+        0 -2px 10px rgba(0, 0, 0, 0.15);  /* 悬停时增强上方阴影 */
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);  /* 悬停时增强文字阴影 */
+}
+
+.video-item iframe {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem 2rem;  /* 调整移动端的内边距 */
+    }
+    
+    .nav-links {
+        gap: 1.5rem;  /* 调整移动端链接间距 */
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* 添加弹出窗口样式 */
+.contact-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    text-align: center;
+    min-width: 300px;
+}
+
+.contact-modal.show {
+    display: block;
+}
+
+.contact-modal h2 {
+    color: #000000;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.contact-modal p {
+    color: #333333;
+    margin: 0.8rem 0;
+    font-size: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 2rem;
+}
+
+.contact-modal span {
+    color: #000000;
+    font-weight: 500;
+    min-width: 3em;
+    text-align: right;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: #000000;
+    cursor: pointer;
+    font-size: 1.5rem;
+    opacity: 0.7;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    opacity: 1;
+}
+
+.contact-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.8rem 0;
+}
+
+.contact-item p {
+    margin: 0;
+}
+
+.copy-btn {
+    background: #1e90ff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px; /* 添加左边距 */
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #1c86ee; /* 悬停时改变背景颜色 */
+}
+
+.copy-btn:active {
+    transform: scale(0.95);
+}
+
+/* 为图片展示区域添加特殊的网格布局 */
+.section-title + .portfolio-grid {
+    grid-template-columns: repeat(4, 1fr);  /* 4列 */
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .section-title + .portfolio-grid {
+        grid-template-columns: 1fr;  /* 在移动设备上改为单列 */
+    }
+}
+
+/* 滑动展示样式 */
+.slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 1600px;
+    padding: 3rem 0;  /* 增加上下内边距 */
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 700px;
+    width: 100%;
+    cursor: grab;
+    user-select: none;
+}
+
+.slider img {
+    min-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    pointer-events: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    line-height: 0;
+    padding: 0;
+}
+
+.slider-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.prev {
+    left: 0;
+    padding-right: 2px;
+}
+
+.next {
+    right: 0;
+    padding-left: 2px;
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.dot.active {
+    background: white;
+}
+
+.resume-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px); /* 减去导航栏的高度 */
+    padding: 20px;
+}
+
+.resume-container {
+    width: 100%;
+    max-width: 794px; /* A4 纸的宽度 */
+    margin: 0 auto;
+    text-align: center;
+}
+
+.resume-image {
+    width: 100%;
+    height: auto;
+    max-width: 794px;        /* A4 宽度 */
+    max-height: 1123px;      /* A4 高度 */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 0 auto;
+}
+
+.download-btn-container {
+    position: absolute;
+    right: 30px;  /* 调整按钮位置 */
+    top: 20px;
+    z-index: 9999;
+}
+
+.download-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(30, 144, 255, 0.9);
+    color: white;
+    padding: 1rem 1.2rem;  /* 增加按钮大小 */
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1rem;  /* 增加字体大小 */
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    white-space: nowrap;
+}
+
+.download-btn:hover {
+    background: rgba(30, 144, 255, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.download-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.download-btn:hover .download-icon {
+    transform: translateY(2px);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .resume-content {
+        padding: 10px;
+    }
+    
+    .resume-container {
+        width: 90%;
+    }
+    
+    .resume-image {
+        width: 100%;
+        height: auto;
+    }
+    
+    .download-btn-container {
+        right: 15px;  /* 移动端调整右侧间距 */
+        top: 10px;
+    }
+    
+    .download-btn {
+        padding: 0.6rem 1rem;  /* 在移动端进一步减小内边距 */
+        font-size: 0.85rem;
+    }
+}
+
+/* 响应式调整 */
+@media (max-width: 1440px) {
+    .hero,
+    .portfolio-grid,
+    .section-title,
+    .slider-container,
+    .navbar {
+        padding: 1rem 3rem;  /* 调整中等屏幕的内边距 */
+    }
+    
+    .prev {
+        left: 1rem;
+    }
+    
+    .next {
+        right: 1rem;
+    }
+}
+
+@media (min-width: 1441px) {
+    .navbar {
+        padding: 1rem 0;  /* 在大屏幕上移除水平内边距 */
+    }
+}
+
+.qr-code {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.qr-code img {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.qr-code p {
+    margin-top: 0.8rem;
+    color: #666666;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 0;
+    margin: 0.8rem auto;  /* 使用 margin: auto 来居中 */
+    width: fit-content;  /* 让宽度适应内容 */
+}
+
+/* 确保内容在缩放时不会被裁剪 */
+html {
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* 调整第一个展示区域的间距 */
+.hero-content + .section-title {
+    margin-top: 6rem;  /* 为第一个展示区域添加更大的顶部间距 */
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+    z-index: 3;
+}
+
+.image-compare {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    cursor: col-resize;
+    user-select: none;
+}
+
+.image-before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);  /* 初始裁切左半部分 */
+}
+
+.image-after img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.drag-ball {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;  /* 球体的宽度 */
+    height: 30px;  /* 球体的高度 */
+    background: rgba(255, 255, 255, 0.8);  /* 球体的颜色 */
+    border-radius: 50%;  /* 圆形 */
+    transform: translate(-50%, -50%);  /* 居中对齐 */
+    cursor: grab;  /* 鼠标样式 */
+    z-index: 2;  /* 确保球体在图片上方 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);  /* 添加阴影 */
+    transition: transform 0.2s ease;  /* 添加过渡效果 */
+}
+
+.drag-ball:hover {
+    transform: translate(-50%, -50%) scale(1.1);  /* 悬停时放大 */
+}
+
+.drag-ball:active {
+    cursor: grabbing;  /* 拖动时改变光标样式 */
+}
+
+.drag-tip {
+    position: absolute;
+    top: 60%;  /* 根据需要调整位置 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 3;  /* 确保提示文本在球体上方 */
+    white-space: nowrap;  /* 防止文本换行 */
+}
+
+.ai-showcase {
+    width: 100%;
+    max-width: 1600px;
+    padding: 3rem 0;
+    margin: 0 auto;
+}
+
+.ai-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.ai-item {
+    position: relative;
+    height: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    cursor: col-resize;
+    user-select: none;
+}
+
+.ai-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ai-item img:last-child {
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .ai-grid {
+        grid-template-columns: 1fr; /* 在手机端设置为单列 */
+        padding: 1rem;
+    }
+}
+
+/* 禁用图片拖动效果 */
+.ai-item img {
+    pointer-events: none;  /* 禁用鼠标事件 */
+    user-drag: none;  /* 禁用拖动 */
+    -webkit-user-drag: none;  /* Safari 支持 */
+}
+
+/* 禁用对比线的样式 */
+.comparison-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;  /* 线的宽度 */
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);  /* 线的颜色 */
+    transform: translateX(-50%);  /* 居中对齐 */
+    pointer-events: none;  /* 禁用鼠标事件 */
+    z-index: 1;  /* 确保线在图片上方 */
+}
+
+.drag-ball {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    z-index: 2;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.drag-ball:hover {
+    transform: translate(-50%, -50%) scale(1.1);  /* 悬停时放大 */
+}
+
+.drag-ball:active {
+    cursor: grabbing;  /* 拖动时改变光标样式 */
+}
+
+.drag-tip {
+    position: absolute;
+    top: 60%;  /* 根据需要调整位置 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 3;  /* 确保提示文本在球体上方 */
+    white-space: nowrap;  /* 防止文本换行 */
+}
+
+.modal {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+}
+
+.black-background {
+    width: 100%;
+    height: 100px;  /* 设置高度 */
+    background-color: #121212;  /* 黑色背景 */
+    position: relative;  /* 确保它在内容下方 */
+    margin-top: 20px;  /* 与内容之间的间距 */
+}
+
+.ai-item.placeholder {
+    background-color: #1a2632; /* 深色背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #2d3a45; /* 添加边框 */
+}
+
+.placeholder-text {
+    color: #ff3b30; /* 红色文字 */
+    font-size: 1.5rem;
+    text-align: center;
+} 
