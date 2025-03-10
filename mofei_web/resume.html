@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简历 - 专业电商摄影师</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 添加放大效果的样式 */
+        .modal {
+            display: none; /* 默认隐藏 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar-container">
+        <nav class="navbar">
+            <a href="index.html" class="nav-brand">薛茂豪</a>
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="resume.html" class="active">简历</a>
+                <a href="#contact">联系我</a>
+            </div>
+        </nav>
+    </div>
+
+    <main class="resume-content">
+        <div class="resume-container">
+            <img src="images/resume.jpg" alt="个人简历" class="resume-image" id="resumeImage">
+        </div>
+    </main>
+
+    <!-- 放大图片的模态框 -->
+    <div class="modal" id="imageModal">
+        <img src="" alt="放大简历" id="modalImage">
+    </div>
+
+    <div class="contact-modal" id="contactModal">
+        <div class="modal-close" onclick="closeModal()">×</div>
+        <h2>联系方式</h2>
+        <div class="contact-item">
+            <p><span>微信：</span>Utopia932</p>
+            <button class="copy-btn" onclick="copyText('Utopia932')">复制</button>
+        </div>
+        <div class="contact-item">
+            <p><span>手机：</span>13356344417</p>
+            <button class="copy-btn" onclick="copyText('13356344417')">复制</button>
+        </div>
+        <div class="contact-item">
+            <p><span>邮箱：</span>qq5289151542@gmail.com</p>
+            <button class="copy-btn" onclick="copyText('qq5289151542@gmail.com')">复制</button>
+        </div>
+        <div class="qr-code">
+            <img src="images/qr-code.jpg" alt="微信二维码" />
+            <p>扫码添加微信</p>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('a[href="#contact"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('contactModal').classList.add('show');
+        });
+
+        function closeModal() {
+            document.getElementById('contactModal').classList.remove('show');
+        }
+
+        window.addEventListener('click', function(e) {
+            if (e.target == document.getElementById('contactModal')) {
+                closeModal();
+            }
+        });
+
+        let scale = 1;
+        const MIN_SCALE = 0.5;
+        const MAX_SCALE = 2;
+        const SCALE_STEP = 0.1;
+
+        document.addEventListener('wheel', function(e) {
+            if (e.ctrlKey) {
+                e.preventDefault();
+                
+                if (e.deltaY < 0) {
+                    scale = Math.min(scale + SCALE_STEP, MAX_SCALE);
+                } else {
+                    scale = Math.max(scale - SCALE_STEP, MIN_SCALE);
+                }
+                
+                document.body.style.transform = `scale(${scale})`;
+                document.body.style.transformOrigin = '50% 0';
+            }
+        }, { passive: false });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey) {
+                if (e.key === '=' || e.key === '+') {
+                    e.preventDefault();
+                    scale = Math.min(scale + SCALE_STEP, MAX_SCALE);
+                    document.body.style.transform = `scale(${scale})`;
+                } else if (e.key === '-') {
+                    e.preventDefault();
+                    scale = Math.max(scale - SCALE_STEP, MIN_SCALE);
+                    document.body.style.transform = `scale(${scale})`;
+                } else if (e.key === '0') {
+                    e.preventDefault();
+                    scale = 1;
+                    document.body.style.transform = 'scale(1)';
+                }
+            }
+        });
+
+        // 点击图片放大效果
+        const resumeImage = document.getElementById('resumeImage');
+        const imageModal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+
+        resumeImage.addEventListener('click', function() {
+            modalImage.src = resumeImage.src; // 设置模态框中的图片源
+            imageModal.style.display = 'flex'; // 显示模态框
+        });
+
+        imageModal.addEventListener('click', function() {
+            imageModal.style.display = 'none'; // 点击模态框关闭
+        });
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('已复制: ' + text); // 提示用户已复制
+            }).catch(err => {
+                console.error('复制失败:', err);
+            });
+        }
+    </script>
+</body>
+</html> 
